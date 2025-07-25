@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "412211300052",
+    "project_id": "tu-ruta-express-38c8f",
+    "storage_bucket": "tu-ruta-express-38c8f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412211300052:android:cdb7a9cfccb3e223a61d41",
+        "android_client_info": {
+          "package_name": "com.turutaexpress"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQLGcChOWqLPSP6tAT4Uy-w3711UjkwxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
