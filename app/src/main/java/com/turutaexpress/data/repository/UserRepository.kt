@@ -1,5 +1,7 @@
 package com.turutaexpress.data.repository
 
+import android.content.Context
+import android.net.Uri
 import com.turutaexpress.data.model.MototaxiProfile
 import com.turutaexpress.data.model.Site
 import com.turutaexpress.data.model.User
@@ -11,6 +13,9 @@ import kotlinx.coroutines.tasks.await
 import com.google.firebase.firestore.ktx.snapshots
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
+import java.io.File
+import java.io.FileOutputStream
+
 
 data class MototaxistaDisponible(
     val user: User,
@@ -76,6 +81,29 @@ class UserRepository {
                 "address" to address
             )).await()
             Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun saveProfileImageLocally(context: Context, uid: String, imageUri: Uri): Result<String> {
+        return try {
+            val inputStream = context.contentResolver.openInputStream(imageUri)
+                ?: return Result.failure(Exception("No se pudo abrir la imagen."))
+
+            val directory = context.filesDir
+            val file = File(directory, "$uid.jpg")
+            val outputStream = FileOutputStream(file)
+
+            inputStream.use { input ->
+                outputStream.use { output ->
+                    input.copyTo(output)
+                }
+            }
+
+            val localPath = file.absolutePath
+            usersCollection.document(uid).update("profileImageUrl", localPath).await()
+            Result.success(localPath)
         } catch (e: Exception) {
             Result.failure(e)
         }

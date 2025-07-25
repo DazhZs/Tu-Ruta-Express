@@ -1,6 +1,8 @@
 package com.turutaexpress.presentation.client.home
 
-import androidx.compose.foundation.Image
+import androidx.compose.ui.platform.LocalContext
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -63,12 +65,9 @@ fun ClientHomeScreen(navController: NavController, viewModel: ClientHomeViewMode
                 ) {
                     items(drivers) { driver ->
                         DriverCard(driver = driver, onSelect = {
-                            navController.navigate(
-                                AppScreens.RequestServiceScreen.createRoute(
-                                    driverId = driver.user.uid,
-                                    driverName = driver.user.name
-                                )
-                            )
+                            // Navegamos a la ruta del sub-grafo, pasándole los argumentos.
+                            val route = "request_flow/${driver.user.uid}/${driver.user.name}"
+                            navController.navigate(route)
                         })
                     }
                 }
@@ -89,8 +88,13 @@ fun DriverCard(driver: MototaxistaDisponible, onSelect: () -> Unit) {
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_profile_placeholder),
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(driver.user.profileImageUrl)
+                    .placeholder(R.drawable.ic_profile_placeholder)
+                    .error(R.drawable.ic_profile_placeholder)
+                    .crossfade(true)
+                    .build(),
                 contentDescription = "Foto de perfil",
                 modifier = Modifier
                     .size(60.dp)

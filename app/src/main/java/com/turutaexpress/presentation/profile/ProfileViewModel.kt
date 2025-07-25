@@ -3,6 +3,7 @@ package com.turutaexpress.presentation.profile
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.ViewModel
@@ -50,6 +51,19 @@ class ProfileViewModel : ViewModel() {
                 loadUserProfile()
             }.onFailure {
                 _updateStatus.value = "Error: ${it.message}"
+            }
+        }
+    }
+
+    fun saveProfileImage(context: Context, imageUri: Uri) {
+        viewModelScope.launch {
+            _updateStatus.value = "Guardando imagen..."
+            val result = userRepository.saveProfileImageLocally(context, currentUser.uid, imageUri)
+            result.onSuccess {
+                _updateStatus.value = "Imagen de perfil actualizada."
+                loadUserProfile()
+            }.onFailure {
+                _updateStatus.value = "Error al guardar la imagen: ${it.message}"
             }
         }
     }

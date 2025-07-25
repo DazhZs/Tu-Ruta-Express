@@ -21,6 +21,26 @@ class AuthViewModel : ViewModel() {
     private val _authState = MutableStateFlow<AuthState>(AuthState.Idle)
     val authState: StateFlow<AuthState> = _authState
 
+    fun checkCurrentUser() {
+        viewModelScope.launch {
+            _authState.value = AuthState.Loading
+            val currentUser = repository.getCurrentUser()
+            if (currentUser != null) {
+                val userDataResult = repository.getUserData(currentUser.uid)
+                userDataResult.onSuccess { user ->
+                    repository.updateFCMToken()
+                    _authState.value = AuthState.Success(user)
+                }.onFailure {
+                    // Si hay usuario en Auth pero no en DB, es un error. Mandar a Login.
+                    _authState.value = AuthState.Error(it.message ?: "Usuario no encontrado en la base de datos.")
+                }
+            } else {
+                // Si no hay usuario en Auth, es normal. Mandar a Login.
+                _authState.value = AuthState.Error("No hay sesión activa.")
+            }
+        }
+    }
+
     fun login(email: String, password: String) {
         viewModelScope.launch {
             _authState.value = AuthState.Loading

@@ -9,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.turutaexpress.navigation.AppScreens
 
@@ -17,10 +16,9 @@ import com.turutaexpress.navigation.AppScreens
 @Composable
 fun RequestServiceScreen(
     navController: NavController,
-    driverId: String,
-    driverName: String
+    viewModel: RequestViewModel // Recibimos el ViewModel que comparte el grafo de navegación
 ) {
-    val viewModel: RequestViewModel = viewModel()
+    val driverName = viewModel.driverName // Obtenemos el nombre del conductor desde el ViewModel
 
     val serviceTypes = listOf("Transporte", "Mandado", "Pago de Servicios")
     val (selectedType, onTypeSelected) = remember { mutableStateOf(serviceTypes[0]) }
@@ -34,8 +32,10 @@ fun RequestServiceScreen(
         when (val state = uiState) {
             is RequestUiState.Success -> {
                 Toast.makeText(context, "Solicitud Enviada", Toast.LENGTH_SHORT).show()
+                // Navegamos a la pantalla de estado, que está en el mismo sub-grafo.
                 navController.navigate(AppScreens.RequestStatusScreen.createRoute(state.requestId)) {
-                    popUpTo(AppScreens.ClientHomeScreen.route)
+                    // Limpiamos el stack hasta la pantalla de inicio del sub-grafo para que "atrás" no vuelva aquí.
+                    popUpTo(AppScreens.RequestServiceScreen.route) { inclusive = true }
                 }
                 viewModel.resetUiState()
             }

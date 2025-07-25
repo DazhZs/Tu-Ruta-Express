@@ -12,6 +12,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.turutaexpress.navigation.AppScreens
 import com.turutaexpress.presentation.auth.AuthViewModel
 import com.turutaexpress.presentation.auth.AuthState
 
@@ -33,8 +34,24 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel = 
     val authState by authViewModel.authState.collectAsState()
     val context = LocalContext.current
 
+    // --- INICIO DE LA CORRECCIÓN ---
     LaunchedEffect(authState) {
         when(val state = authState) {
+            is AuthState.Success -> {
+                // Este bloque es el que faltaba. Ahora RegisterScreen también navega.
+                Toast.makeText(context, "Registro exitoso. ¡Bienvenido ${state.user.name}!", Toast.LENGTH_SHORT).show()
+                val destination = when (state.user.role) {
+                    "Cliente" -> AppScreens.ClientHomeScreen.route
+                    "Mototaxista" -> AppScreens.DriverHomeScreen.route
+                    "Sitio" -> AppScreens.SiteHomeScreen.route
+                    else -> AppScreens.LoginScreen.route // Fallback
+                }
+                // Usamos popUpTo(AppScreens.LoginScreen.route) para limpiar todo el stack de autenticación.
+                navController.navigate(destination) {
+                    popUpTo(AppScreens.LoginScreen.route) { inclusive = true }
+                }
+                authViewModel.resetAuthState()
+            }
             is AuthState.Error -> {
                 Toast.makeText(context, state.message, Toast.LENGTH_LONG).show()
                 authViewModel.resetAuthState()
@@ -42,6 +59,7 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel = 
             else -> Unit
         }
     }
+    // --- FIN DE LA CORRECCIÓN ---
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         if (authState == AuthState.Loading) {

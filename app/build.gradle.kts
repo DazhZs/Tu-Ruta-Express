@@ -76,4 +76,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.play.services) // Para integrar con Firebase/Play Services
+
+    // Coil (Cargar imágenes desde URL o archivos locales)
+    implementation(libs.coil.compose)
 }

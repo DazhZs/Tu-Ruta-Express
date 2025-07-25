@@ -2,59 +2,56 @@ package com.turutaexpress.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Paleta para el Tema Claro (Light Theme)
-val Primary = Color(0xFF0D47A1)        // Azul oscuro y profesional
-val OnPrimary = Color(0xFFFFFFFF)       // Texto sobre el color primario (blanco)
-val PrimaryContainer = Color(0xFFBBDEFB) // Contenedor primario (azul claro)
-val OnPrimaryContainer = Color(0xFF001E3C) // Texto sobre el contenedor primario
+// --- TEMA CLARO (LIGHT THEME) ---
 
-val Secondary = Color(0xFF4CAF50)       // Verde para acciones de éxito, "disponible"
-val OnSecondary = Color(0xFFFFFFFF)     // Texto sobre el secundario
-val SecondaryContainer = Color(0xFFC8E6C9) // Contenedor secundario (verde claro)
-val OnSecondaryContainer = Color(0xFF00210B)
+// El ámbar/dorado del pelaje del jaguar será nuestro color primario.
+val PrimaryJaguar = Color(0xFFFFB300) // Un ámbar vibrante.
+val OnPrimaryJaguar = Color(0xFF000000) // Texto negro para un contraste fuerte.
+val PrimaryContainerJaguar = Color(0xFFFFECB3) // Un crema/amarillo muy pálido para contenedores.
+val OnPrimaryContainerJaguar = Color(0xFF241A00)
 
-val Tertiary = Color(0xFFF57C00)        // Naranja/Ámbar para alertas o énfasis
-val OnTertiary = Color(0xFFFFFFFF)
-val TertiaryContainer = Color(0xFFFFE0B2)
-val OnTertiaryContainer = Color(0xFF2F1500)
+// El verde selva puede ser nuestro secundario para acciones positivas.
+val SecondaryJaguar = Color(0xFF2E7D32)
+val OnSecondaryJaguar = Color(0xFFFFFFFF)
+val SecondaryContainerJaguar = Color(0xFFA5D6A7)
+val OnSecondaryContainerJaguar = Color(0xFF00210A)
 
-val Error = Color(0xFFB00020)           // Rojo estándar para errores
-val OnError = Color(0xFFFFFFFF)
+// Tonos tierra para los fondos y superficies.
+val BackgroundJaguar = Color(0xFFFFF8E1) // Un fondo color crema/pergamino.
+val OnBackgroundJaguar = Color(0xFF1E1B16)
+val SurfaceJaguar = Color(0xFFFFFCF5) // Las tarjetas un poco más claras que el fondo.
+val OnSurfaceJaguar = Color(0xFF1E1B16)
 
-val Background = Color(0xFFF7F9FC)       // Fondo de la app (un gris azulado muy claro)
-val OnBackground = Color(0xFF191C1E)    // Texto sobre el fondo
-val Surface = Color(0xFFFFFFFF)         // Superficie de las Cards (blanco puro)
-val OnSurface = Color(0xFF191C1E)       // Texto sobre las superficies
+// El negro de las manchas del jaguar.
+val SurfaceVariantJaguar = Color(0xFFE7E0D0) // Variante de superficie
+val OnSurfaceVariantJaguar = Color(0xFF494539)
+val OutlineJaguar = Color(0xFF7A7567)
 
-val SurfaceVariant = Color(0xFFDFE2EB)  // Variante para superficies (ej. fondo de OutlinedTextField)
-val OnSurfaceVariant = Color(0xFF43474E) // Texto sobre la variante
-val Outline = Color(0xFF73777F)         // Borde de los OutlinedTextField, etc.
+// Rojo para errores.
+val ErrorJaguar = Color(0xFFBA1A1A)
 
 
-// Paleta para el Tema Oscuro (Dark Theme) - Opcional pero recomendado
-val DarkPrimary = Color(0xFF90CAF9)
-val DarkOnPrimary = Color(0xFF003366)
-val DarkPrimaryContainer = Color(0xFF004A94)
-val DarkOnPrimaryContainer = Color(0xFFD3E4FF)
+// --- TEMA OSCURO (DARK THEME) ---
 
-val DarkSecondary = Color(0xFFA5D6A7)
-val DarkOnSecondary = Color(0xFF1B391E)
-val DarkSecondaryContainer = Color(0xFF325034)
-val DarkOnSecondaryContainer = Color(0xFFC1F3BE)
+// En modo oscuro, el negro es el protagonista y el ámbar resalta.
+val DarkPrimaryJaguar = Color(0xFFE7C346) // Ámbar un poco menos saturado para no deslumbrar.
+val DarkOnPrimaryJaguar = Color(0xFF3F2E00)
+val DarkPrimaryContainerJaguar = Color(0xFF5A4300)
+val DarkOnPrimaryContainerJaguar = Color(0xFFFFDEA3)
 
-val DarkTertiary = Color(0xFFFFB74D)
-val DarkOnTertiary = Color(0xFF4A2500)
-val DarkTertiaryContainer = Color(0xFF693800)
-val DarkOnTertiaryContainer = Color(0xFFFFDDB8)
+val DarkSecondaryJaguar = Color(0xFF8BC34A) // Un verde más brillante en la oscuridad.
+val DarkOnSecondaryJaguar = Color(0xFF003912)
+val DarkSecondaryContainerJaguar = Color(0xFF186326)
+val DarkOnSecondaryContainerJaguar = Color(0xFF9EF2A1)
 
-val DarkError = Color(0xFFFFB4AB)
-val DarkOnError = Color(0xFF690005)
+// Fondos y superficies oscuros, casi negros.
+val DarkBackgroundJaguar = Color(0xFF1E1B16) // Un negro "cálido", no puro.
+val DarkOnBackgroundJaguar = Color(0xFFE7E2D9)
+val DarkSurfaceJaguar = Color(0xFF15130C) // Las tarjetas un poco más oscuras que el fondo.
+val DarkOnSurfaceJaguar = Color(0xFFE7E2D9)
 
-val DarkBackground = Color(0xFF121212) // Fondo oscuro clásico
-val DarkOnBackground = Color(0xFFE2E2E6)
-val DarkSurface = Color(0xFF1E1E1E) // Superficie de las Cards en modo oscuro
-val DarkOnSurface = Color(0xFFE2E2E6)
+val DarkSurfaceVariantJaguar = Color(0xFF494539)
+val DarkOnSurfaceVariantJaguar = Color(0xFFCBC6B4)
+val DarkOutlineJaguar = Color(0xFF949080)
 
-val DarkSurfaceVariant = Color(0xFF43474E)
-val DarkOnSurfaceVariant = Color(0xFFC3C7CF)
-val DarkOutline = Color(0xFF8D9199)
+val DarkErrorJaguar = Color(0xFFFFB4AB)

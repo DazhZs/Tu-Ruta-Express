@@ -13,15 +13,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.turutaexpress.data.model.ServiceRequest
 import com.turutaexpress.data.model.ServiceStatus
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RequestStatusScreen(navController: NavController, requestId: String) {
-    val viewModel: RequestViewModel = viewModel()
+fun RequestStatusScreen(
+    navController: NavController,
+    viewModel: RequestViewModel, // Recibimos el ViewModel compartido
+    requestId: String           // Seguimos necesitando el ID para iniciar el rastreo
+) {
     val request by viewModel.serviceRequest.collectAsState()
 
     LaunchedEffect(requestId) {
